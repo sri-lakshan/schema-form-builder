@@ -1,5 +1,3 @@
-// src/main/java/com/example/demo/controller/FormController.java
-
 package com.example.formbuilder.controller;
 
 import com.example.formbuilder.dto.FormRequest;
@@ -29,7 +27,7 @@ import java.util.Set;
 
 @RestController
 @RequestMapping("/api/form")
-@CrossOrigin(origins = "http://localhost:4200") // or use "*" during dev
+@CrossOrigin(origins = {"https://chipper-cheesecake-5b0b56.netlify.app", "http://localhost:4200"})
 public class FormController {
 
     private final ObjectMapper objectMapper = new ObjectMapper();

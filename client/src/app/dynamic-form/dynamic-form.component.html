@@ -1,0 +1,62 @@
+<div class="zf-templateWidth">
+  <form [formGroup]="form" (ngSubmit)="onSubmit()" accept-charset="UTF-8" enctype="multipart/form-data" id="form">
+    <div class="zf-templateWrapper">
+      <ul class="zf-tempHeadBdr">
+        <li class="zf-tempHeadContBdr">
+          <h2 class="zf-frmTitle">
+            <em>Schema-Driven Form Builder with Live Validation</em>
+          </h2>
+          <p class="zf-frmDesc">Develop and validate forms based on JSON schema.</p>
+          <div class="zf-clearBoth"></div>
+        </li>
+      </ul>
+
+      <div class="zf-subContWrap zf-topAlign">
+        <ul>
+          <li *ngFor="let key of form?.controls | keyvalue">
+            <div class="zf-tempFrmWrapper zf-large">
+              <label class="zf-labelName">{{ schema.properties[key.key].title }}</label>
+              <div class="zf-tempContDiv">
+                <span>
+                  <input
+                    [type]="schema.properties[key.key].type === 'number' ? 'number' : 'text'"
+                    [formControlName]="key.key"
+                    [attr.name]="key.key"
+                    [attr.placeholder]="schema.properties[key.key].title"
+                    class="form-control"
+                    [class.zf-error]="errors[key.key]"
+                  />
+                </span>
+                <p
+                  *ngIf="errors[key.key]"
+                  id="{{ key.key }}_error"
+                  class="zf-errorMessage"
+                  style="display: block;"
+                >
+                  {{ errors[key.key] }}
+                </p>
+              </div>
+              <div class="zf-clearBoth"></div>
+            </div>
+          </li>
+        </ul>
+      </div>
+
+      <ul>
+        <li class="zf-fmFooter">
+          <div class="button-group">
+            <button class="zf-submitColor">Submit</button>
+            <button type="button" (click)="exportForm()" class="zf-submitColor">Export Form</button>
+            <label class="zf-submitColor">Import JSON Schema/Form<input type="file" (change)="importForm($event)" hidden /></label>
+          </div>
+          <div class="button-group">
+            <button type="button" (click)="toggleSchemaView()" class="zf-submitColor schema-toggle">{{ showSchema ? 'Hide Current Schema' : 'View Current Schema' }}</button>
+            <button type="button" (click)="toggleSubmissions()" class="zf-submitColor schema-toggle">{{ showSubmissions ? 'Hide Submissions' : 'View Submissions' }}</button>
+          </div>
+          <div *ngIf="showSubmissions"><app-submissions></app-submissions></div>
+          <div *ngIf="showSchema" class="schema-viewer"><pre>{{ schema | json }}</pre> </div>
+        </li>
+      </ul>
+    </div>
+  </form>
+</div>

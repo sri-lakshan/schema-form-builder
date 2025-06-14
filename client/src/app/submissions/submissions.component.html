@@ -1,0 +1,15 @@
+<div style="padding: 20px;">
+  <h2 style="margin-bottom: 20px;">Submitted Forms</h2>
+
+  <div *ngIf="submissions.length === 0">
+    No submissions yet.
+  </div>
+
+  <mat-card *ngFor="let item of submissions" style="margin-bottom: 15px; padding: 15px;">
+    <mat-card-title>Schema</mat-card-title>
+    <pre>{{ item.schema | json }}</pre>
+
+    <mat-card-title>Data</mat-card-title>
+    <pre>{{ item.data | json }}</pre>
+  </mat-card>
+</div>

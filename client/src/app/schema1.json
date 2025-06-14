@@ -1,0 +1,49 @@
+{
+  "title": "User Registration",
+  "type": "object",
+  "properties": {
+    "name": { "type": "string", "title": "Full Name" },
+    "age": { "type": "number", "title": "Age", "minimum": 18 },
+    "email": { "type": "string", "title": "Email", "format": "email" }
+  },
+  "required": ["name", "age", "email"]
+}
+
+
+SCHEMA 2
+{
+  "title": "Job Application",
+  "type": "object",
+  "properties": {
+    "fullName": {
+      "type": "string",
+      "title": "Full Name"
+    },
+    "email": {
+      "type": "string",
+      "title": "Email Address",
+      "format": "email"
+    },
+    "phone": {
+      "type": "string",
+      "title": "Phone Number",
+      "pattern": "^[0-9]{10}$"
+    },
+    "yearsOfExperience": {
+      "type": "number",
+      "title": "Years of Experience",
+      "minimum": 0
+    },
+    "portfolio": {
+      "type": "string",
+      "title": "Portfolio URL",
+      "format": "uri"
+    },
+    "willingToRelocate": {
+      "type": "string",
+      "title": "Willing to Relocate (yes/no)",
+      "enum": ["yes", "no"]
+    }
+  },
+  "required": ["fullName", "email", "phone", "yearsOfExperience"]
+}

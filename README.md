@@ -12,6 +12,10 @@ schema-form-builder/
 
 ## Setup Instructions
 
+### Note
+
+I deployed this application using Render(Springboot backend) and Netlify(Angular frontend), so it doesn't need to be installed locally. It is now live at [Schema Form Builder](https://chipper-cheesecake-5b0b56.netlify.app/) . Please do check it out.
+
 ### Prerequisites
 
 - node.js + NPM

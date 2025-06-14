@@ -51,6 +51,7 @@ server/nbbuild/
 server/nbdist/
 server/.nb-gradle/
 server/build/
+server/target
 
 # ==================== GENERATED FILES ====================
 submissions.json

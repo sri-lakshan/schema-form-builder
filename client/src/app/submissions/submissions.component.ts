@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { HttpClientModule, HttpClient } from '@angular/common/http';
 import { MatCardModule } from '@angular/material/card';
+import { environment } from '../../environments/environment.prod';
 
 @Component({
   standalone: true,
@@ -16,7 +17,7 @@ export class SubmissionsComponent implements OnInit {
   constructor(private http: HttpClient) {}
 
   ngOnInit(): void {
-    this.http.get<any[]>('http://localhost:8080/api/form/submissions')
+    this.http.get<any[]>(`${environment.apiBaseUrl}/submissions`)
       .subscribe(data => this.submissions = data);
   }
 }

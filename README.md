@@ -22,7 +22,7 @@ schema-form-builder/
 ### 1. Clone the Repository
 
 ```bash
-git clone https://github.com/your-username/schema-form-builder.git
+git clone https://github.com/sri-lakshan/schema-form-builder.git
 cd schema-form-builder
 ```
 

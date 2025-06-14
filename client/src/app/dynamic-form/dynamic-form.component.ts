@@ -14,6 +14,7 @@ import { tryCatch, fold } from 'fp-ts/Either';
 
 import schema from '../schema.json';
 import { HttpClient, HttpClientModule } from '@angular/common/http';
+import { environment } from '../../environments/environment.prod';
 
 @Component({
   standalone: true,
@@ -116,7 +117,7 @@ export class DynamicFormComponent implements OnInit {
       data: rawData
     };
 
-    this.http.post('http://localhost:8080/api/form/submit', payload).subscribe({
+    this.http.post(`${environment.apiBaseUrl}/submit`, payload).subscribe({
       next: res => this.snackBar.open('Form submitted to server!', 'Close', { duration: 3000 }),
       error: err => {
         this.snackBar.open('Please check the errors before submitting!', 'Close', { duration: 3000 });
@@ -223,7 +224,7 @@ export class DynamicFormComponent implements OnInit {
   }
 
   viewSubmissions() {
-    this.http.get('http://localhost:8080/api/form/submissions').subscribe({
+    this.http.get(`${environment.apiBaseUrl}/submissions`).subscribe({
       next: res => {
         const blob = new Blob([JSON.stringify(res, null, 2)], { type: 'application/json' });
         const url = URL.createObjectURL(blob);

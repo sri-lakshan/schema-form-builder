@@ -38,10 +38,6 @@ client/testem.log
 client/typings
 
 # ==================== SERVER (Spring Boot) ====================
-server/target/
-server/.mvn/
-server/mvnw
-server/mvnw.cmd
 server/.idea/
 server/.vscode/
 

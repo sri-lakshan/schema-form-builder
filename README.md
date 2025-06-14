@@ -1,156 +1,122 @@
+# Schema-Driven Form Builder with Live Validation
+
+A minimal full-stack web application that dynamically renders and validates forms based on a given JSON Schema. The design for the form is inspired by the default [Zoho forms template](https://www.zoho.com/forms/templates.html). A big thanks to Zoho for providing the problem description!
+
+## Project Structure
 
 ```
-schema-form-builder
-├─ client
-│  ├─ .angular
-│  │  └─ cache
-│  │     └─ 18.2.20
-│  │        └─ form-builder
-│  │           ├─ .tsbuildinfo
-│  │           └─ vite
-│  │              └─ deps
-│  │                 ├─ @angular_common.js
-│  │                 ├─ @angular_common.js.map
-│  │                 ├─ @angular_common_http.js
-│  │                 ├─ @angular_common_http.js.map
-│  │                 ├─ @angular_core.js
-│  │                 ├─ @angular_core.js.map
-│  │                 ├─ @angular_forms.js
-│  │                 ├─ @angular_forms.js.map
-│  │                 ├─ @angular_material_card.js
-│  │                 ├─ @angular_material_card.js.map
-│  │                 ├─ @angular_material_snack-bar.js
-│  │                 ├─ @angular_material_snack-bar.js.map
-│  │                 ├─ @angular_platform-browser.js
-│  │                 ├─ @angular_platform-browser.js.map
-│  │                 ├─ @angular_platform-browser_animations_async.js
-│  │                 ├─ @angular_platform-browser_animations_async.js.map
-│  │                 ├─ ajv-formats.js
-│  │                 ├─ ajv-formats.js.map
-│  │                 ├─ ajv.js
-│  │                 ├─ ajv.js.map
-│  │                 ├─ browser-Y2MVPJEH.js
-│  │                 ├─ browser-Y2MVPJEH.js.map
-│  │                 ├─ chunk-2ENIS7UZ.js
-│  │                 ├─ chunk-2ENIS7UZ.js.map
-│  │                 ├─ chunk-3OV72XIM.js
-│  │                 ├─ chunk-3OV72XIM.js.map
-│  │                 ├─ chunk-4VHW7RAF.js
-│  │                 ├─ chunk-4VHW7RAF.js.map
-│  │                 ├─ chunk-4XIOXAIQ.js
-│  │                 ├─ chunk-4XIOXAIQ.js.map
-│  │                 ├─ chunk-7QXJTASL.js
-│  │                 ├─ chunk-7QXJTASL.js.map
-│  │                 ├─ chunk-AITI3JTU.js
-│  │                 ├─ chunk-AITI3JTU.js.map
-│  │                 ├─ chunk-AKGS32YP.js
-│  │                 ├─ chunk-AKGS32YP.js.map
-│  │                 ├─ chunk-N4MUV2WV.js
-│  │                 ├─ chunk-N4MUV2WV.js.map
-│  │                 ├─ chunk-YVJDRGE5.js
-│  │                 ├─ chunk-YVJDRGE5.js.map
-│  │                 ├─ fp-ts_Either.js
-│  │                 ├─ fp-ts_Either.js.map
-│  │                 ├─ fp-ts_function.js
-│  │                 ├─ fp-ts_function.js.map
-│  │                 ├─ package.json
-│  │                 └─ _metadata.json
-│  ├─ .editorconfig
-│  ├─ angular.json
-│  ├─ package-lock.json
-│  ├─ package.json
-│  ├─ public
-│  │  └─ favicon.ico
-│  ├─ README.md
-│  ├─ src
-│  │  ├─ app
-│  │  │  ├─ app.component.css
-│  │  │  ├─ app.component.html
-│  │  │  ├─ app.component.spec.ts
-│  │  │  ├─ app.component.ts
-│  │  │  ├─ app.config.ts
-│  │  │  ├─ dynamic-form
-│  │  │  │  ├─ dynamic-form.component.css
-│  │  │  │  ├─ dynamic-form.component.html
-│  │  │  │  ├─ dynamic-form.component.spec.ts
-│  │  │  │  └─ dynamic-form.component.ts
-│  │  │  ├─ schema copy.json
-│  │  │  ├─ schema.json
-│  │  │  ├─ schema1.json
-│  │  │  ├─ submissions
-│  │  │  │  ├─ submissions.component.css
-│  │  │  │  ├─ submissions.component.html
-│  │  │  │  ├─ submissions.component.spec.ts
-│  │  │  │  └─ submissions.component.ts
-│  │  │  └─ validators.ts
-│  │  ├─ assets
-│  │  │  └─ zoho-form.css
-│  │  ├─ index.html
-│  │  ├─ main.ts
-│  │  └─ styles.css
-│  ├─ tsconfig.app.json
-│  ├─ tsconfig.json
-│  └─ tsconfig.spec.json
-├─ server
-│  ├─ .mvn
-│  │  └─ wrapper
-│  │     └─ maven-wrapper.properties
-│  ├─ HELP.md
-│  ├─ mvnw
-│  ├─ mvnw.cmd
-│  ├─ pom.xml
-│  ├─ src
-│  │  ├─ main
-│  │  │  ├─ java
-│  │  │  │  └─ com
-│  │  │  │     └─ example
-│  │  │  │        └─ formbuilder
-│  │  │  │           ├─ controller
-│  │  │  │           │  └─ FormController.java
-│  │  │  │           ├─ dto
-│  │  │  │           │  └─ FormRequest.java
-│  │  │  │           └─ FormbuilderApplication.java
-│  │  │  └─ resources
-│  │  │     ├─ application.properties
-│  │  │     ├─ static
-│  │  │     └─ templates
-│  │  └─ test
-│  │     └─ java
-│  │        └─ com
-│  │           └─ example
-│  │              └─ formbuilder
-│  │                 └─ FormbuilderApplicationTests.java
-│  ├─ submissions.json
-│  └─ target
-│     ├─ classes
-│     │  ├─ application.properties
-│     │  └─ com
-│     │     └─ example
-│     │        └─ formbuilder
-│     │           ├─ controller
-│     │           │  └─ FormController.class
-│     │           ├─ dto
-│     │           │  └─ FormRequest.class
-│     │           └─ FormbuilderApplication.class
-│     ├─ generated-sources
-│     │  └─ annotations
-│     ├─ generated-test-sources
-│     │  └─ test-annotations
-│     ├─ maven-status
-│     │  └─ maven-compiler-plugin
-│     │     ├─ compile
-│     │     │  └─ default-compile
-│     │     │     ├─ createdFiles.lst
-│     │     │     └─ inputFiles.lst
-│     │     └─ testCompile
-│     │        └─ default-testCompile
-│     │           ├─ createdFiles.lst
-│     │           └─ inputFiles.lst
-│     └─ test-classes
-│        └─ com
-│           └─ example
-│              └─ formbuilder
-│                 └─ FormbuilderApplicationTests.class
-└─ submissions.json
-
+schema-form-builder/
+├── client/      # Angular app frontend
+└── server/      # Java Spring Boot backend
 ```
+
+## Setup Instructions
+
+### Prerequisites
+
+- node.js + NPM
+- Java JDK
+- Maven
+- Angular CLI
+
+### 1. Clone the Repository
+
+```bash
+git clone https://github.com/your-username/schema-form-builder.git
+cd schema-form-builder
+```
+
+### 2. Run the Backend Server (Spring Boot)
+
+```bash
+cd server
+mvnw.cmd spring-boot:run  # Windows
+```
+
+The server will start on http://localhost:8080. All valid submissions will be saved in `server/submissions.json`.
+
+### 3. Run the Frontend Client (Angular)
+
+```bash
+cd ../client
+npm install
+ng serve
+```
+
+Open http://localhost:4200 to view the app.
+
+### If You See an Empty Form
+
+If no schema has been uploaded yet, a snackbar message will appear:
+
+"You have not uploaded any schema yet, please click on the import button to import your schema."
+
+To import a schema, simply click on the Import JSON Schema button and upload your desired schema.
+
+## Summary of how the app handles each requirement:
+
+### 1. Input
+
+- The app uses the default [Zoho forms template](https://www.zoho.com/forms/templates.html). Users can import a valid JSON Schema.
+
+### 2. Dynamic Form Rendering
+
+- Forms are dynamically generated using Angular based on the uploaded schema.
+- Only the fields described in the schema are rendered.
+- Types, labels, and constraints are adhered to.
+
+### 3. Real-Time Validation
+
+- Client-side validation is powered by `ajv` and `ajv-formats`.
+- Errors are shown inline with each field during user interaction.
+
+### 4. Server Validation
+
+- On submission, data is sent to a Spring Boot backend.
+- The backend uses the same JSON Schema for validation (via `everit-org/json-schema`).
+- On success, the data and associated schema are stored persistently in `submissions.json`.
+
+### 5. Export
+
+- User can export the current schema and filled-in data.
+- Exported file can be re-imported, fully restoring the state of the form.
+
+### 6. Persistence
+
+- Valid submissions are stored in a JSON file (`server/submissions.json`).
+- Each entry contains the submitted form data along with the schema it was based on.
+- View all previous submissions from the “Submissions” screen in the app.
+
+## Libraries Used
+
+Front-end : Angular 17, Angular Material, AJV, fp-ts 
+The client-side form validator uses `fp-ts` for a type-safe approach to export the form data.
+
+Back-end : Spring Boot (Java 17), Everit JSON Schema
+For Validation : AJV (client), Everit JSON Schema (server)
+
+## Repo Notes
+
+### submissions.json
+
+This file holds a list of all valid submission entries. Each entry contains:
+
+```json
+{
+  "schema": { ... },
+  "data": { ... }
+}
+```
+
+## Side Notes
+
+- Try uploading an invalid schema — an error will be shown
+- Submit invalid form data — errors will be shown inline and submission will be blocked
+- Submit valid data — it will be saved and appear under “Submissions”
+
+
+## Author
+
+Built by Srilakshan A for the Zoho Schema-Driven Form Builder assessment.
+
+

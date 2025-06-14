@@ -58,3 +58,4 @@ server/build/
 
 # ==================== GENERATED FILES ====================
 submissions.json
+client/src/app/schema1.json
